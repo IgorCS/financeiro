@@ -69,21 +69,19 @@ public class CadastroUsuarioBean implements Serializable {
 		} catch (InterruptedException e) {
 		}
 		
-		/*
-		 HashMap<Integer, List<String>> clientes = new HashMap<Integer, List<String>> ();  
-       List<String> nomes = new ArrayList<String>();
-		 */
-
+		//HashMap para verificar se o usuário retorna uma chave e verifica se existe 
 		Map<Integer, String> usuariosExistentes = new HashMap<Integer, String>();
 		List<String> nomesExistentes = new ArrayList<String>();
 		
 		nomesExistentes.addAll(usuarios.usuarioExiste(usuarioLogin));
-		
+		//Aqui faz a chamada do Metódo e verifica se o LOGIN está disponível 
 		this.usuarioExiste = this.usuarios.usuarioExiste(usuarioLogin);
-		
+		//Aqui eu passo um Objeto do Tipo interio e um do tipo String e acrescento minha coleção de String
+		//à um código para melhor visualizar o que está no Array de String
 		usuariosExistentes.put(new Integer(1), nomesExistentes.toString());
 		nomesExistentes = new ArrayList<String>();
-
+        //No laço é que eu verifico os usuários e na repetição ele verifica o usuário existente 
+		//no banco de dados 
 		for (Integer codigo : usuariosExistentes.keySet()) {
 			 // for (String nome : clientes.get(codigo)) {
 			for (String nomeUsuario : usuariosExistentes.values()) {				
@@ -96,10 +94,9 @@ public class CadastroUsuarioBean implements Serializable {
 
 			}
 		}
-
+        //Aqui é a condição para que o usuário possa verificar na view se o LOGIN que foi digitado
+		//por ele existe ou não.
 		if (usuarioExiste.contains(this.usuario.getNome())) {
-			// if ("joao".equals(this.usuario.getNome())){
-			// if ("joao".equalsIgnoreCase(this.login)) {
 			msg = new FacesMessage("Este Login já está em uso!");
 			msg.setSeverity(FacesMessage.SEVERITY_WARN);
 		} else {
